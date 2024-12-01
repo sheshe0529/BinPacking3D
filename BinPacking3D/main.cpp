@@ -77,14 +77,6 @@ void leerArchivoVehiculos(const char *nombArch, Vehiculo &vehiculo){
 }
 
 void imprimirSolucion(Vehiculo vehiculo){
-//    cout<<"Vehiculo obtenido: "<<endl;
-//    cout<<"Peso acumulado: "<<vehiculo.pesoAcum
-//            <<" Capacidad maxima del vehiculo: "<<vehiculo.pesoMax<<endl;
-//    cout<<"Lista de paquetes del vehiculo: "<<endl;
-//    for(Paquete paq : vehiculo.paquetes){
-//        cout<<paq.pesoPaquete<<" ";
-//    }
-//    cout<<endl;
     double porcentajeLleno = (vehiculo.pesoAcum / vehiculo.pesoMax) * 100;
     double volVehiculo = (double)vehiculo.alto*vehiculo.ancho*vehiculo.largo;
     double volPaquetes = 0;
@@ -92,14 +84,14 @@ void imprimirSolucion(Vehiculo vehiculo){
         volPaquetes += paq.alto*paq.ancho*paq.largo;
     // Imprimimos información general del vehículo
     cout << "==================== REPORTE DEL VEHÍCULO ====================\n";
-    cout << "Capacidad máxima: " << vehiculo.pesoMax << " kg" << endl;
-    cout << "Peso acumulado: " << vehiculo.pesoAcum << " kg" << endl;
+    cout << "Capacidad máxima: " << vehiculo.pesoMax << " Tn" << endl;
+    cout << "Peso acumulado: " << vehiculo.pesoAcum << " Tn" << endl;
     cout << "Volumen del Vehículo: " << volVehiculo << " m^3" << endl;
     cout << "Volumen acumulado: " << volPaquetes << " m^3" << endl;
     cout << "Dimensiones Vehículo (Largo/Ancho/Alto): " << vehiculo.largo << " x " << vehiculo.ancho << " x " << vehiculo.alto << " m\n";
     cout << "Lista de paquetes en el vehículo (Peso): ";
     for (Paquete paq : vehiculo.paquetes) {
-        cout << paq.id<<"-"<<paq.pesoPaquete << " ";
+        cout << paq.pesoPaquete << " ";
     }
     cout << endl << endl << "Barra Procentual del Vehículo: " << endl;
     // Representación gráfica del camión
@@ -347,13 +339,16 @@ int main(int argc, char** argv) {
     Vehiculo vehiculo;
     vector<Paquete> LPaquetes;
     int numIter = 400;   // Considera mayor población de soluciones
-    double cstRelaj = 0.7; // Solución más aleatoria que voráz 
+    double cstRelaj = 0.7; // Solución más voráz que aleatorio
     
+    // Lectura de archivos txt
     leerArchivoProductos("Paquetes.txt",LPaquetes);
     leerArchivoVehiculos("Vehiculo.txt",vehiculo);
     
+    // Obtener mejor vehículo
     vehiculo = ProcedimientoGRASPBPP3D(vehiculo,LPaquetes,numIter,cstRelaj);
     
+    // Imprimir solución
     imprimirSolucion(vehiculo);
     
     return 0;

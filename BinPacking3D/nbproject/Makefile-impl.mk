@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=TA_VersionFinalFinalFinal
+PROJECTNAME=BinPacking3D
 
 # Active Configuration
 DEFAULTCONF=Debug
